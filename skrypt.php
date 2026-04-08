@@ -17,10 +17,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (empty($errors)) {
         // Zapisz do pliku
         $line = "$name|$surname|$email|$topic|$message|" . date('Y-m-d H:i:s') . "\n";
-        file_put_contents('dane.txt', $line, FILE_APPEND);
-        header('Location: index.html?success=1');
-        exit;
-    } else {
+        if (file_put_contents('dane.txt', $line, FILE_APPEND) === false) {
+            $errors[] = "Błąd zapisu do pliku.";
+        } else {
+            header('Location: index.html?success=1');
+            exit;
+        }
+    }
+    if (!empty($errors)) {
         // Przekieruj z błędami w URL
         $error_string = implode('|', $errors);
         header('Location: index.html?errors=' . urlencode($error_string));
