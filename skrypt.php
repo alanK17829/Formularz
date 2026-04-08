@@ -18,20 +18,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Zapisz do pliku
         $line = "$name|$surname|$email|$topic|$message|" . date('Y-m-d H:i:s') . "\n";
         file_put_contents('dane.txt', $line, FILE_APPEND);
-        header('Location: index.html?success=1');
+        header('Location: index.php?success=1');
         exit;
     } else {
-        // Przekieruj z błędami, ale dla uproszczenia, przekieruj do index.html z błędami w sesji lub parametrach
-        // Aby uprościć, przekieruj do index.html bez parametrów, ale użytkownik może nie zobaczyć błędów
+        // Przekieruj z błędami, ale dla uproszczenia, przekieruj do index.php z błędami w sesji lub parametrach
+        // Aby uprościć, przekieruj do index.php bez parametrów, ale użytkownik może nie zobaczyć błędów
         // Lepiej użyć sesji dla błędów
         session_start();
         $_SESSION['errors'] = $errors;
         $_SESSION['form_data'] = $_POST;
-        header('Location: index.html');
+        header('Location: index.php');
         exit;
     }
 } else {
-    header('Location: index.html');
+    header('Location: index.php');
     exit;
 }
 ?>
