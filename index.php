@@ -1,3 +1,10 @@
+<?php
+session_start();
+$success = isset($_GET['success']);
+$errors = $_SESSION['errors'] ?? [];
+$form_data = $_SESSION['form_data'] ?? [];
+unset($_SESSION['errors'], $_SESSION['form_data']);
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,25 +25,28 @@
         <section>
             <h1>Formularz kontaktowy</h1>
             <br>
+            <?php if ($success) echo "<p style='color: green;'>Wiadomość została wysłana pomyślnie.</p>"; ?>
+            <?php if (!empty($errors)) { echo "<ul style='color: red;'>"; foreach ($errors as $error) echo "<li>$error</li>"; echo "</ul>"; } ?>
             <form action="skrypt.php" method="post">
                 <label for="name">Imię:</label>
-                <input class="guzior" type="text" id="name" name="name" required>
+                <input class="guzior" type="text" id="name" name="name" required value="<?php echo htmlspecialchars($form_data['name'] ?? ''); ?>">
                 <br><br>
                 <label for="surname">Nazwisko:</label>
-                <input class="guzior" type="text" id="surname" name="surname" required>
+                <input class="guzior" type="text" id="surname" name="surname" required value="<?php echo htmlspecialchars($form_data['surname'] ?? ''); ?>">
                 <br><br>
                 <label for="email">Email:</label>
-                <input class="guzior" type="email" id="email" name="email" required>
+                <input class="guzior" type="email" id="email" name="email" required value="<?php echo htmlspecialchars($form_data['email'] ?? ''); ?>">
                 <br><br>
                 <label for="topic">Temat:</label>
-                <input class="guzior" type="text" id="topic" name="topic" required>
+                <input class="guzior" type="text" id="topic" name="topic" required value="<?php echo htmlspecialchars($form_data['topic'] ?? ''); ?>">
                 <br><br>
                 <label for="message">Wiadomość:</label>
-                <textarea class="guzior" id="message" name="message" required></textarea>
+                <textarea class="guzior" id="message" name="message" required><?php echo htmlspecialchars($form_data['message'] ?? ''); ?></textarea>
                 <br><br>          
                 <button class="guzior2" type="submit">Wyślij</button>
             </form>
             <br>
+            <a href="messages.php">Zobacz zapisane wiadomości</a>
             
         </section>
     </main>
