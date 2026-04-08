@@ -58,7 +58,7 @@ if (file_exists('dane.txt')) {
                 <?php endforeach; ?>
             </table>
             <br>
-            <a href="index.php">Powrót do formularza</a>
+            <a href="index.html">Powrót do formularza</a>
         </section>
     </main>
     <footer>
