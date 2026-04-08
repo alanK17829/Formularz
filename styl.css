@@ -114,6 +114,27 @@ section:hover{
 .contact-info a:hover {
     text-decoration: underline;
 }
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: rgb(41, 187, 255);
+    color: white;
+}
+
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
 footer img{
     width: 20px;
     height:20px;
