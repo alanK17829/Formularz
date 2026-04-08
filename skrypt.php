@@ -21,13 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: index.html?success=1');
         exit;
     } else {
-        // Przekieruj z błędami, ale dla uproszczenia, przekieruj do index.html z błędami w sesji lub parametrach
-        // Aby uprościć, przekieruj do index.html bez parametrów, ale użytkownik może nie zobaczyć błędów
-        // Lepiej użyć sesji dla błędów
-        session_start();
-        $_SESSION['errors'] = $errors;
-        $_SESSION['form_data'] = $_POST;
-        header('Location: index.html');
+        // Przekieruj z błędami w URL
+        $error_string = implode('|', $errors);
+        header('Location: index.html?errors=' . urlencode($error_string));
         exit;
     }
 } else {
