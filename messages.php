@@ -29,11 +29,12 @@ if (file_exists('dane.txt')) {
 </head>
 <body>
     <header>
-    
+        
+    <h1>Zapisane wiadomości</h1>
 
     </header>
     <div class="fundament">
-        <h1>Zapisane wiadomości</h1>
+        
     </div>
     <main>
         <section>
